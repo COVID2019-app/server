@@ -1,11 +1,11 @@
-require('dotenv')
-const dbUrl = process.env.DB_URL
-console.log(dbUrl)
+require('dotenv').config()
+
+
   module.exports = {
     development: {
     client:'pg',
   
-      connection:dbUrl,
+      connection:process.env.DB_URL,
       
 
  
