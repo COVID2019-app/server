@@ -14,18 +14,18 @@ function getData(){
 
 function postData(data){
     return db('country_table')
-    .insert(data,'id')
+    .insert(data,'country_id')
 }
 
-function updateData(id, updates) {
+function updateData(country_id, updates) {
     return db("country_table")
-      .where({ id })
-      .update(updates).orderBy("id")
+      .where({ country_id })
+      .update(updates).orderBy("country_id")
   }
   
-  function deleteData(id) {
+  function deleteData(country_id) {
     return db("country_table")
-      .where({ id })
+      .where({ country_id })
       .truncate()
       .delete()
   }
