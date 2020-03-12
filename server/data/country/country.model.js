@@ -23,7 +23,7 @@ function updateData(id, updates) {
       .update(updates).orderBy("id")
   }
   
-  function deleteProject(id) {
+  function deleteData(id) {
     return db("country_table")
       .where({ id })
       .truncate()
