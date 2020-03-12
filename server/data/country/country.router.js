@@ -40,7 +40,7 @@ router.put('/:id',(req,res) =>{
     .catch(error =>{res.status(401).json(error.message)})
 })
 
-router.delete('/id',(req,res)=> {
+router.delete('/:id',(req,res)=> {
     const id = req.params.id
     db.deleteData(id)
     .then(deleteData =>{
