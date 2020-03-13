@@ -1,5 +1,5 @@
 const db = require('../db')
-
+const jdb = require('../db')
 module.exports = {
     getData,
     postData,
@@ -9,7 +9,10 @@ module.exports = {
 
 function getData(){
     return db('regions_table')
-    .orderBy('regions_name')
+    .join('country_table','country_table.country_id','regions_table.country_id')
+    .select('country_table.deaths','country_table.confirmed_cases','regions_table.*')
+    
+   
 }
 
 function postData(data){

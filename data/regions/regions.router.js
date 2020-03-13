@@ -8,6 +8,7 @@ const db = require("./regions.model")
  * @returns {Object}
  */
 router.get("/",(req,res) =>{
+    
     db.getData()
     .then(data => {
         res.status(200).json(data)
