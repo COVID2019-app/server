@@ -9,7 +9,7 @@ module.exports = {
 
 function getData(){
     return db('country_table')
-    .orderBy('country_name')
+    .orderBy('country_id')
 }
 
 function postData(data){
