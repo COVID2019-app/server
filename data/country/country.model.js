@@ -9,7 +9,7 @@ module.exports = {
 
 function getData(){
     return db('country_table')
-    .orderBy('confirmed_case')
+    .orderBy('confirmed_cases')
 }
 
 function postData(data){
