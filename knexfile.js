@@ -5,7 +5,7 @@
     development: {
     client:'pg',
   
-      connection:'postgres://postgres:postgres@react-frontend.cpoid8l3wfgy.us-west-2.rds.amazonaws.com:5432/react_frontend',
+      connection:process.env.DB_URL,
       
 
  
@@ -22,7 +22,7 @@
       production: {
         client:'pg',
       
-          connection:process.env.HOME_URL,
+          connection:process.env.DB_URL,
           
     
      
