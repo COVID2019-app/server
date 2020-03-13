@@ -1,14 +1,14 @@
 import json
+f = open('regions.json','r+')
+fa = json.load(f)
+s = open('country.json','r+')
+sa = json.load(s)
 
-with open('latest_home_data.json','r+') as f:
-    data = json.load(f)
-    datas = {}
-    values = data.values()
-    k = data.keys()
+for values in sa:
+    for values in range(0,-1):
 
-    #n = delattr(data.keys)
-    f.write(str(data.values()))
-    f.close()    
-    print(f)
+        fa.append(sa[0]['confirmed_cases'])
+        print(fa)
+    
 
     
