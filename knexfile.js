@@ -1,11 +1,11 @@
-require('dotenv').config()
+
 
 
   module.exports = {
     development: {
     client:'pg',
   
-      connection:'postgres://postgres:postgres@react-frontend.cpoid8l3wfgy.us-west-2.rds.amazonaws.com:5432/react_frontend?ssl=true',
+      connection:'postgres://postgres:postgres@react-frontend.cpoid8l3wfgy.us-west-2.rds.amazonaws.com:5432/react_frontend',
       
 
  
@@ -22,7 +22,7 @@ require('dotenv').config()
       production: {
         client:'pg',
       
-          connection:process.env.DB_URL,
+          connection:process.env.HOME_URL,
           
     
      
