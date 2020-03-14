@@ -5,7 +5,7 @@
     development: {
     client:'pg',
   
-      connection:process.env.DB_URL,
+      connection:process.env.DB_URL
       
 
  
