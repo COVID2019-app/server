@@ -7,8 +7,9 @@ const db = require("./country.model")
  * @code 200
  * @returns {Object}
  */
-router.get("/",(req,res) =>{
-    if (!req.body) {
+router.get("/sort",(req,res) =>{
+
+    if (!req.body.category) {
         db.getData("confirmed_cases")
           .then(data => {
             res.status(200).json(data);
@@ -17,7 +18,7 @@ router.get("/",(req,res) =>{
             res.status(401).json({ message: error.message });
           });
  } else {
-     db.getData(req.body)
+     db.getData(req.body.category)
        .then(data => {
          res.status(200).json(data);
        })

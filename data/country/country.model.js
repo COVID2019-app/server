@@ -7,9 +7,9 @@ module.exports = {
     deleteData
 }
 
-function getData(){
+function getData(category){
     return db('country_table')
-    .orderBy('confirmed_cases','desc')
+        .orderBy(category,'desc')
 }
 
 function postData(data){
