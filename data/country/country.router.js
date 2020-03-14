@@ -8,12 +8,25 @@ const db = require("./country.model")
  * @returns {Object}
  */
 router.get("/",(req,res) =>{
-    db.getData()
-    .then(data => {
-        res.status(200).json(data)
-    })
-    .catch(error =>{res.status(401).json({message:error.message})})
-})
+    if (!req.body) {
+        db.getData("confirmed_cases")
+          .then(data => {
+            res.status(200).json(data);
+          })
+          .catch(error => {
+            res.status(401).json({ message: error.message });
+          });
+ } else {
+     db.getData(req.body)
+       .then(data => {
+         res.status(200).json(data);
+       })
+       .catch(error => {
+         res.status(401).json({ message: error.message });
+       });
+}
+}
+)
 
 /**
  * @param {POST}
