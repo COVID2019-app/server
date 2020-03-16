@@ -1,5 +1,5 @@
 import json
-f = open('regions.json','r+')
+f = open('data.json','r+')
 fa = json.load(f)
 s = open('country.json','r+')
 sa = json.load(s)

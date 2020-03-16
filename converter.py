@@ -1,16 +1,23 @@
-import pandas as pd
+# import pandas as pd
 
 
 
+# df.to_json (r'data.csv')
 
 
-df = pd.read_csv (r'italy1.csv')
+# import pandas as pd
+# df = pd.read_json (r'data.json')
+# df.to_csv (r'data.csv', index = None)
 
-
-
-df.to_json (r'data.json')
-
-
+# data = open('data.json','w')
+# newData = {}
+# newData = write('data.json')
+# print(newData)
+# for items in data['USA']:
+#     print(dir(data))
+    
+    
+    
 
 
 
@@ -24,13 +31,13 @@ df.to_json (r'data.json')
 # import csv
 # import json
 
-# csvFilePath = 'italy.csv'
-# jsonFilePath = 'cases.json'
+# csvFilePath = 'data.csv'
+# jsonFilePath = 'data.json'
 # data = {}
 
-# with open(csvFilePath) as csvFile:
+# with open(jso) as csvFile:
 #     csvReader = csv.DictReader(csvFile)
-#     for rows in csvReader:
+#     for keys in jsonReader:
 #         id = rows['region']
       
 #         data[id] = rows
