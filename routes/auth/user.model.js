@@ -7,9 +7,10 @@ module.exports = {
     deleteData
 }
 
-function getData(){
+function getData(username){
     return db('users')
-
+            
+           
         
 }
 

@@ -1,3 +1,4 @@
+  
 const jwt = require('jsonwebtoken')
 
 const secrets = require('../../config/default')
@@ -35,5 +36,6 @@ function generateToken(newUser) {
 
   return jwt.sign(payload, secrets.jwtSecret, options)
 }
+
 
 
