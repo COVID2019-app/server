@@ -7,7 +7,7 @@ const db = require("./regions.model")
  * @code 200
  * @returns {Object}
  */
-router.get("/",(req,res) =>{
+router.get("/all",(req,res) =>{
     
     db.getData()
     .then(data => {
@@ -15,6 +15,17 @@ router.get("/",(req,res) =>{
     })
     .catch(error =>{res.status(401).json({message:error.message})})
 })
+router.get('/:id',(req,res) =>{
+    const id = req.params.id
+    db.joinData(id)
+    .then(response =>{
+        res.status(200).json(response)
+    })
+    .catch(error =>{
+        res.status(401).json({message:error.message},error)
+    })
+})
+
 
 /**
  * @param {POST}
