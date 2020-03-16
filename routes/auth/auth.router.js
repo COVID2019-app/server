@@ -6,17 +6,17 @@ const jwt = require('jsonwebtoken');
 
 const secrets = require('../../config/default');
 
-// for endpoints beginning with /auth
+
+// for endpoints beginning with /api/auth
 router.post('/register', (req, res) => {
-  let username = req.body.username;
-  let password = req.body.password
-  console.log("THis is",username.password)
-  let hash = bcrypt.hashSync(password,10); // 2 ^ n
-    password = hash
-  const data={username:username,password:hash}
-  db.postData('users',data)
+  let user = req.body;
+  console.log("THis is",user)
+  const hash = bcrypt.hashSync(user.password,10); // 2 ^ n
+ user.password = hash
+
+  db.postData(user)
     .then(saved => {
-    
+      console.log("Add Route",saved)
       res.status(201).json(saved);
     })
     .catch(error => {
@@ -26,30 +26,49 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-  let  username = req.body.username;
-  let  password = req.body.password
-  let data = {username, password}
-   console.log(data)
-  db.getData('users', data)
+
+  
+    const username = req.body.username
+    const password = req.body.password
+    console.log(username,password)
+  if(!password){
+    return res.status(401).json({message:"Check password"})
+  }
+  db.getData(username)
     .first()
     .then(user => {
-      if (user) {
+      console.log(user)
+      if (user.password === password) {
         // produce token
-        const token = generateToken(user.username);
+        const token = generateToken(user);
 
         // add token to response
-        res.status(200).json({
-          message: `Welcome ${user.username}`,
+       return  res.status(200).json({
+          message: `Welcome ${user.username}!`,
           token,
         });
       } else {
-        res.status(401).json({ message: 'Invalid Credentials' });
+        return res.status(401).json({ message: 'Invalid Credentials' });
       }
     })
     .catch(error => {
-      res.status(500).json(error);
+    return   res.status(401).json({message:"Please check login credentials",error:error.message});
     });
 });
+router.get("/logout",(req,res) =>{
+  if(req.session){
+    req.session.destroy(err =>{
+      res
+        .status(200)
+        .json({
+          message:
+          'Logout successfull'
+        })
+    })
+  }else {
+    res.status(200).json({message:'Not logged in'})
+  }
+})
 
 
 function generateToken(user) {
@@ -59,7 +78,7 @@ function generateToken(user) {
     role: user.role,
   };
   const options = {
-    expiresIn: '4h',
+    expiresIn: '1h',
   };
 
   return jwt.sign(payload, secrets.jwtSecret, options);
