@@ -36,6 +36,7 @@ router.get("/sort",(req,res) =>{
  * @returns {String} ID
  */
 router.post('/',(req,res) =>{
+  console.log(req)
     const data = req.body
     db.postData(data)
     .then(projectObj => {
@@ -47,6 +48,7 @@ router.post('/',(req,res) =>{
 router.put('/:id',(req,res) =>{
     const id = req.params.id
     const updates = req.body
+    console.log(req.body,req.headers,id,updates)
     db.updateData(id,updates)
     .then(updatedProject =>{
         res.status(200).json(updatedProject)
