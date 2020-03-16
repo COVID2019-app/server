@@ -15,6 +15,35 @@ router.get("/",(req,res) =>{
     })
     .catch(error =>{res.status(401).json({message:error.message})})
 })
+router.get('/:id',(req,res) =>{
+    const id = req.params.id
+    console.log("ID",id)
+    console.log("REQ.PARAMS.ID",req.params.id)
+    db.joinData(id)
+    .then(response =>{
+        console.log(response)
+        res.status(200).json(response)
+    })
+    .catch(error =>{
+        console.log(error)
+        res.status(401).json(error.message)
+    })
+})
+router.post('/byDate',(req,res) =>{
+    const id = req.body.id
+    const date = req.body.date
+    console.log("ID",id,date)
+    
+    db.joinCountryByDate(id,date)
+    .then(response =>{
+        console.log(response)
+        res.status(200).json(response)
+    })
+    .catch(error =>{
+        console.log(error)
+        res.status(401).json(error.message)
+    })
+})
 
 /**
  * @param {POST}

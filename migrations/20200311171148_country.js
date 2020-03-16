@@ -19,6 +19,7 @@ exports.up = function(knex,Promise) {
             .onDelete("CASCADE")
             .onUpdate("CASCADE")
      tbl.string('regions_name')
+     tbl.date('date_of_case')
      tbl.integer('confirmed_cases')
      tbl.integer('deaths')
 
