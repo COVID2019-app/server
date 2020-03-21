@@ -36,10 +36,9 @@ function getRegionSum(id) {
 
 
 function joinData(id){
-    return db('regions_table')
-    .join('country_table','country_table.country_id','regions_table.country_id')
-    .where('regions_table.country_id','=',id)
-    .select("*")
+    return db("regions_table")
+     .where("regions_table.country_id", "=", id)
+      .select("*");
     
 }
 
