@@ -6,17 +6,34 @@ module.exports = {
     updateData,
     deleteData,
     joinData,
-    joinCountryByDate
+    joinCountryByDate,
+    getRegionData,
+    getRegionSum
 }
 
 function getData(){
     return db('regions_table')
     .orderBy('regions_name')
 
-
-    
-   
 }
+
+function getRegionData(id){
+    return db('regions_table')
+    .select('*') 
+    .from('regions_table')
+    .where('country_id', '=', id)
+    //.groupBy('regions_name')
+}
+function getRegionSum(id) {
+    return db('regions_table')
+        .select('regions_name')
+        .sum('confirmed_cases as cases')
+        .sum('deaths as deaths')
+        .from('regions_table')
+        .where('country_id', '=', id)
+        .groupBy('regions_name')
+}
+
 
 function joinData(id){
     return db('regions_table')
@@ -51,3 +68,4 @@ function updateData(regions_id, updates) {
       .truncate()
       .delete()
   }
+
