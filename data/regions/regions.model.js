@@ -22,12 +22,11 @@ function getRegionData(id){
     .select('*') 
     .from('regions_table')
     .where('country_id', '=', id)
-    //.groupBy('regions_name')
 }
 function getRegionSum(id) {
     return db('regions_table')
         .select('regions_name')
-        .sum('confirmed_cases as cases')
+        .sum('confirmed_cases as confirmed_cases')
         .sum('deaths as deaths')
         .from('regions_table')
         .where('country_id', '=', id)
