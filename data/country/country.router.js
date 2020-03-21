@@ -39,8 +39,8 @@ router.post('/',(req,res) =>{
   console.log(req)
     const data = req.body
     db.postData(data)
-    .then(projectObj => {
-        res.status(201).json(projectObj)
+    .then(Obj => {
+        res.status(201).json(Obj)
     })
     .catch(error => {res.status(401).json(error.message)})
 })
