@@ -4,14 +4,18 @@ module.exports = {
     getData,
     postData,
     updateData,
-    deleteData
+    deleteData,
+    getDataId
 }
 
 function getData(category){
     return db('country_table')
         .orderBy(category,'desc')
 }
-
+function getDataId(id){
+    return db('country_table')
+    .where('country_id','=',id)
+}
 function postData(data){
     return db('country_table')
     .insert(data,'country_id')

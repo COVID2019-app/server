@@ -10,6 +10,8 @@ var usersRouter = require('./routes/users');
 const regionsRouter = require('./data/regions/regions.router')
 const usaRouter = require('./data/country/USA/usa.router')
 const authRouter = require('./routes/auth/auth.router')
+const graphqlHTTP = require('express-graphql')
+
 var app = express();
 var cors = require("cors");
 
@@ -29,6 +31,11 @@ app.use('/country', countryRouter);
 app.use('/users', usersRouter);
 app.use('/regions',regionsRouter)
 app.use('/usa_regions',usaRouter)
+app.use('/graphql', graphqlHTTP({
+
+  graphiql: true
+}))
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

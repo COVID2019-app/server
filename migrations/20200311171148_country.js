@@ -9,6 +9,7 @@ exports.up = function(knex,Promise) {
       tbl.integer('severe_critical');
       tbl.integer('tested');
       tbl.integer('active_cases');
+      
   })
   .createTable('regions_table',tbl =>{
       tbl.increments("regions_id");
@@ -19,6 +20,7 @@ exports.up = function(knex,Promise) {
             .onDelete("CASCADE")
             .onUpdate("CASCADE")
      tbl.string('regions_name')
+     tbl.date('date_of_case')
      tbl.integer('confirmed_cases')
      tbl.integer('deaths')
 
