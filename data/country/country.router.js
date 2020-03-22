@@ -30,6 +30,20 @@ router.get("/sort",(req,res) =>{
 )
 
 /**
+ * @param {GET}
+ * @code 200
+ * @returns {Object} Country
+ */
+
+ router.post('/:id' ,(req,res) =>{
+   const id = req.params.id
+   db.getDataId(id)
+   .then(data =>{
+     res.status(200).json(data)
+   })
+   .catch(error =>{res.status(401).json(error.message)})
+ })
+/**
  * @param {POST}
  * @code 201
  * @returns {Object}
