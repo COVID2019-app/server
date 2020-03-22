@@ -13,4 +13,6 @@ If you make changes
 
 After changes are pushed visit the repo on github and submit a pull request to have your changes merged to master.
 
+api docs [(https://documenter.getpostman.com/view/7960570/SzS8rjuG?version=latest)]
+
 # PLEASE DO NOT MERGE YOUR OWN PULL REQUESTS
