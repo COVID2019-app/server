@@ -15,7 +15,25 @@ router.get("/",(req,res) =>{
     })
     .catch(error =>{res.status(401).json({message:error.message})})
 })
-router.get('/:id',(req,res) =>{
+router.get("/sum/:id", (req, res) => {
+    const id = req.params.id
+
+    db.getRegionSum(id)
+        .then(data => {
+            res.status(200).json(data)
+        })
+        .catch(error => { res.status(401).json({ message: error.message }) })
+})
+router.get("/:id", (req, res) => {
+    const id = req.params.id
+
+    db.getRegionData(id)
+        .then(data => {
+            res.status(200).json(data)
+        })
+        .catch(error => { res.status(401).json({ message: error.message }) })
+})
+/*router.get('/:id',(req,res) =>{
     const id = req.params.id
     console.log("ID",id)
     console.log("REQ.PARAMS.ID",req.params.id)
@@ -28,7 +46,7 @@ router.get('/:id',(req,res) =>{
         console.log(error)
         res.status(401).json(error.message)
     })
-})
+})*/
 router.post('/byDate',(req,res) =>{
     const id = req.body.id
     const date = req.body.date
@@ -78,5 +96,6 @@ router.delete('/:id',(req,res)=> {
     })
     .catch(error => {res.status(500).json(error.message)})
 })
+
 
 module.exports= router
