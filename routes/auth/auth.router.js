@@ -7,10 +7,9 @@ const jwt = require('jsonwebtoken');
 const secrets = require('../../config/default');
 
 
-// for endpoints beginning with /api/auth
 router.post('/register', (req, res) => {
   let user = req.body;
-  console.log("THis is",user)
+
   const hash = bcrypt.hashSync(user.password,10); // 2 ^ n
  user.password = hash
 

@@ -9,6 +9,7 @@ exports.up = function(knex,Promise) {
       tbl.integer('severe_critical');
       tbl.integer('tested');
       tbl.integer('active_cases');
+      
   })
   .createTable('regions_table',tbl =>{
       tbl.increments("regions_id");
