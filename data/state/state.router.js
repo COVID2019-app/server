@@ -11,8 +11,9 @@ router.get('/',(req,res) =>{
     })
 })
 
-router.get('byCountry/:id', (req,res) =>{
+router.get('/byCountry/:id', (req,res) =>{
     const country_id = req.params.id
+    console.log(country_id)
     db.getByCountryId(country_id)
     .then(response =>{
         return res.status(201).json(response)
