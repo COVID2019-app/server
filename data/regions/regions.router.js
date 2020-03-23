@@ -15,19 +15,19 @@ router.get("/",(req,res) =>{
     })
     .catch(error =>{res.status(401).json({message:error.message})})
 })
-router.get("/sum/:country", (req, res) => {
-    const country = req.params.country
+router.get("/sum/:id", (req, res) => {
+    const id = req.params.id
 
-    db.getRegionSum(country)
+    db.getRegionSum(id)
         .then(data => {
             res.status(200).json(data)
         })
         .catch(error => { res.status(401).json({ message: error.message }) })
 })
-router.get("/:country", (req, res) => {
-    const country = req.params.country
+router.get("/:id", (req, res) => {
+    const id = req.params.id
 
-    db.getRegionData(country)
+    db.getRegionData(id)
         .then(data => {
             res.status(200).json(data)
         })
