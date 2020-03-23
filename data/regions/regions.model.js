@@ -17,20 +17,23 @@ function getData(){
 
 }
 
-function getRegionData(id){
+function getRegionData(country){
     return db('regions_table')
-    .select('*') 
+    .select('regions_table.regions_id', 'regions_table.date_of_case', 'regions_table.regions_name', 'regions_table.confirmed_cases', 'regions_table.deaths')
     .from('regions_table')
-    .where('country_id', '=', id)
+    .leftJoin('country_table', 'regions_table.country_id', 'country_table.country_id' )
+    .select('country_table.country_name')
+    .where('country_table.country_name', '=', country)
 }
-function getRegionSum(id) {
+function getRegionSum(country) {
     return db('regions_table')
         .select('regions_name')
-        .sum('confirmed_cases as confirmed_cases')
-        .sum('deaths as deaths')
+        .sum('regions_table.confirmed_cases as confirmed_cases')
+        .sum('regions_table.deaths as deaths')
         .from('regions_table')
-        .where('country_id', '=', id)
-        .groupBy('regions_name')
+        .leftJoin('country_table', 'regions_table.country_id', 'country_table.country_id')
+        .where('country_table.country_name', '=', country)
+        .groupBy('regions_table.regions_name')
 }
 
 
