@@ -3,7 +3,7 @@ const db = require("./country.model")
 
 /**
  * Countries Router
- * @param {GET} /countries/
+ * @param {GET} /country
  * @code 200
  * @returns {Object}
  */

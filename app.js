@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 const regionsRouter = require('./data/regions/regions.router')
 const usaRouter = require('./data/country/USA/usa.router')
 const authRouter = require('./routes/auth/auth.router')
+const stateRouter = require('./data/state/state.router')
 const graphqlHTTP = require('express-graphql')
 
 var app = express();
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/auth',authRouter)
+app.use('/state',stateRouter)
 app.use('/country', countryRouter);
 app.use('/users', usersRouter);
 app.use('/regions',regionsRouter)
