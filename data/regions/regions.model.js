@@ -47,7 +47,10 @@ function joinCountryByDate(id,date){
     .join('country_table','country_table.country_id','regions_table.country_id')
      .where('regions_table.country_id','=',id)
      .where('regions_table.date_of_case','=',date)
-    .select("*")
+    .select('*',"regions_table.confirmed_cases as daily_confirmed_cases",
+                "regions_table.deaths as daily_deaths",
+                "regions_table.recovered as daily_recovered"
+                )
     
 }
 function postData(data){
