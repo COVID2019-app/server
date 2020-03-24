@@ -2,17 +2,17 @@
 module.exports = {
   development: {
     client: 'pg',
-    connection: process.env.DATABASE_URL,
-    rejectUnauthorized: false,
+    connection: 'postgres://postgres:postgres@react-frontend.cpoid8l3wfgy.us-west-2.rds.amazonaws.com:5432/react_frontend',
+    rejectUnauthorized: false
   },
   production: {
     client: 'pg',
-    connection: process.env.DATABASE_URL,
+    connection: 'postgres://postgres:postgres@react-frontend.cpoid8l3wfgy.us-west-2.rds.amazonaws.com:5432/react_frontend'
   },
   migrations: {
-    directory: './migrations',
+    directory: './migrations'
   },
   seeds: {
-    directory: './seeds',
-  },
+    directory: './seeds'
+  }
 };

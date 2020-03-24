@@ -5,8 +5,7 @@
   "scripts": {
     "start": "cd bin && node www",
     "server": "node ./bin/www",
-    "generate-docs":"jsdoc -c  ./conf.json"
- 
+    "generate-docs": "jsdoc -c  ./conf.json"
   },
   "engines": {
     "node": "10.16.3"
@@ -33,5 +32,4 @@
   "devDependencies": {
     "nodemon": "^1.1.2"
   }
-  
 }
