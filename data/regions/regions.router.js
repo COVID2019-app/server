@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const db = require("./regions.model")
-
+const auth = require("../../routes/auth/auth.middleware")
 /**
  * Regions Router
  * @param {GET} /regions/
@@ -69,33 +69,39 @@ router.post('/byDate',(req,res) =>{
  * @returns {Object}
  * @returns {String} ID
  */
-router.post('/',(req,res) =>{
-    const data = req.body
-    db.postData(data)
+router.post('/', auth.restricted, (req, res) => {
+  const data = req.body;
+  db.postData(data)
     .then(projectObj => {
-        res.status(201).json(projectObj)
+      res.status(201).json(projectObj);
     })
-    .catch(error => {res.status(401).json(error.message)})
-})
+    .catch(error => {
+      res.status(401).json(error.message);
+    });
+});
 
-router.put('/:id',(req,res) =>{
-    const id = req.params.id
-    const updates = req.body
-    db.updateData(id,updates)
-    .then(updatedProject =>{
-        res.status(200).json(updatedProject)
+router.put('/:id', auth.restricted, (req, res) => {
+  const id = req.params.id;
+  const updates = req.body;
+  db.updateData(id, updates)
+    .then(updatedProject => {
+      res.status(200).json(updatedProject);
     })
-    .catch(error =>{res.status(401).json(error.message)})
-})
+    .catch(error => {
+      res.status(401).json(error.message);
+    });
+});
 
-router.delete('/:id',(req,res)=> {
-    const id = req.params.id
-    db.deleteData(id)
-    .then(deleteData =>{
-        res.status(204).json({message:'deleted',deleteData})
+router.delete('/:id', auth.restricted, (req, res) => {
+  const id = req.params.id;
+  db.deleteData(id)
+    .then(deleteData => {
+      res.status(204).json({ message: 'deleted', deleteData });
     })
-    .catch(error => {res.status(500).json(error.message)})
-})
+    .catch(error => {
+      res.status(500).json(error.message);
+    });
+});
 
 
 module.exports= router
