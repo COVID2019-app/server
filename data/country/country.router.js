@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const db = require("./country.model")
-
+const auth = require("../../routes/auth/auth.middleware")
 /**
  * Countries Router
  * @param {GET} /country
@@ -35,7 +35,7 @@ router.get("/sort",(req,res) =>{
  * @returns {Object} Country
  */
 
- router.post('/:id' ,(req,res) =>{
+ router.get('/:id' ,(req,res) =>{
    const id = req.params.id
    db.getDataId(id)
    .then(data =>{
@@ -49,7 +49,7 @@ router.get("/sort",(req,res) =>{
  * @returns {Object}
  * @returns {String} ID
  */
-router.post('/',(req,res) =>{
+router.post('/',auth.restricted,(req,res) =>{
   console.log(req)
     const data = req.body
     db.postData(data)
@@ -59,24 +59,28 @@ router.post('/',(req,res) =>{
     .catch(error => {res.status(401).json(error.message)})
 })
 
-router.put('/:id',(req,res) =>{
-    const id = req.params.id
-    const updates = req.body
-    console.log(req.body,req.headers,id,updates)
-    db.updateData(id,updates)
-    .then(updatedProject =>{
-        res.status(200).json(updatedProject)
+router.put('/:id', auth.restricted, (req, res) => {
+  const id = req.params.id;
+  const updates = req.body;
+  console.log(req.body, req.headers, id, updates);
+  db.updateData(id, updates)
+    .then(updatedProject => {
+      res.status(200).json(updatedProject);
     })
-    .catch(error =>{res.status(401).json(error.message)})
-})
+    .catch(error => {
+      res.status(401).json(error.message);
+    });
+});
 
-router.delete('/:id',(req,res)=> {
-    const id = req.params.id
-    db.deleteData(id)
-    .then(deleteData =>{
-        res.status(204).json({message:'deleted',deleteData})
+router.delete('/:id', auth.restricted, (req, res) => {
+  const id = req.params.id;
+  db.deleteData(id)
+    .then(deleteData => {
+      res.status(204).json({ message: 'deleted', deleteData });
     })
-    .catch(error => {res.status(500).json(error.message)})
-})
+    .catch(error => {
+      res.status(500).json(error.message);
+    });
+});
 
 module.exports= router
