@@ -13,6 +13,12 @@ router.post('/' , (req,res) =>{
 
 })
 
-
+router.get('/', (req,res) =>{
+    db.getData('updates')
+    .then(response =>{
+        res.status(200).json(response)
+    })
+    .catch(error => {res.status(401).json(error)})
+})
 
 module.exports = router
