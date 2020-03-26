@@ -19,15 +19,4 @@ router.get('/',(req,res) =>{
     .catch(err => {res.status(401).json(err.message)})
 })
 
-router.put('/:id',(req,res) =>{
-    const id = req.params.id
-    const updates = req.body
-    db.updateData(id,updates)
-    .then(response => {
-        res.status(201).json(response)
-    })
-    .catch(error => {
-        res.status(401).json(error.message)
-    })
-})
 module.exports = router
