@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/auth',authRouter)
 app.use('/country', countryRouter);
-app.use('updates',updatesRouter)
+app.use('/updates',updatesRouter)
 app.use('/users', usersRouter);
 app.use('/regions',regionsRouter)
 app.use('/usa_regions',usaRouter)
