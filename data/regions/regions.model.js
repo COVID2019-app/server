@@ -27,12 +27,6 @@ function joinData(id){
 
 function joinCountryByDate(id,date){
     return db('regions_table')
-<<<<<<< HEAD
-    .join('country_table','country_table.country_id','regions_table.country_id')
-     .where('regions_table.country_id','=',id)
-     .where('regions_table.date_of_case','=',date)
-    .select("*")
-=======
       .join(
         'country_table',
         'country_table.country_id',
@@ -50,7 +44,6 @@ function joinCountryByDate(id,date){
         'regions_table.date_of_case as date_of_case',
         'country_table.country_name as country_name'
       );
->>>>>>> 8cbfc9f11eeab84f9b7ab1c829a8ef39f766d390
     
 }
 function postData(data){
