@@ -9,7 +9,7 @@ module.exports = {
 
 function getData(username){
     return db('users')
-            
+    .where({username})
            
         
 }

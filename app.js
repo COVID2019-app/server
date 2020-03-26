@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 const regionsRouter = require('./data/regions/regions.router')
 const usaRouter = require('./data/country/USA/usa.router')
 const authRouter = require('./routes/auth/auth.router')
+const updatesRouter = require('./data/updates/updates.router')
 var app = express();
 var cors = require("cors");
 
@@ -26,6 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/auth',authRouter)
 app.use('/country', countryRouter);
+app.use('/updates',updatesRouter)
 app.use('/users', usersRouter);
 app.use('/regions',regionsRouter)
 app.use('/usa_regions',usaRouter)
