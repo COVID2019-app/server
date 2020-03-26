@@ -22,6 +22,7 @@ function getRegionData(id){
     .select('*') 
     .from('regions_table')
     .where('country_id', '=', id)
+    .orderBy('date_of_case', 'asc')
 }
 function getRegionSum(id) {
     return db('regions_table')
