@@ -9,6 +9,7 @@ module.exports = {
 
 function getData(username){
     return db('users')
+    .select('*')
     .where('username','=',username)
            
         
