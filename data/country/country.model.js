@@ -5,7 +5,16 @@ module.exports = {
     postData,
     updateData,
     deleteData,
-    getDataId
+    getDataId,
+    updateAll
+
+}
+
+
+function updateAll(updates){
+    return db('country_table')
+      .insert(updates)
+      .where('country_name','=',updates.country_name)
 }
 
 function getData(category){

@@ -1,11 +1,12 @@
 const router = require('express').Router();
 const db = require('./updates.model')
-
+const fs = require('fs')
 router.post('/' , (req,res) =>{
     console.log(req)
     const data = req.body
- db.postData('updates')
+ db.postData('latest_home_data',data)
  .then(response =>{
+  
      res.status(200).json(response)
  })
  .catch(error => res.status('401').send(`<h4>${error}</h4>`).json(error.message))
@@ -13,9 +14,23 @@ router.post('/' , (req,res) =>{
 
 })
 
-router.get('/', (req,res) =>{
-    db.getData('updates')
+router.get('/',(req,res) =>{
+    db.getMany('latest_home_data')
     .then(response =>{
+      
+     fs.writeFile('data.json',JSON.stringify(response),function (err){
+         if (err) throw err;
+         console.log("Complete")
+     })
+     res.status(200).json(response)
+    })
+    .catch(error => {console.log(error)})
+})
+router.get('/', (req,res) =>{
+    db.getData('latest_home_data')
+
+    .then(response =>{
+        console.log(response)
         res.status(200).json(response)
     })
     .catch(error => {res.status(401).json(error)})
