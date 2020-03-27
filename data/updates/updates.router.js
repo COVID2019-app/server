@@ -13,7 +13,12 @@ router.post('/' , (req,res) =>{
  
 
 })
-
+router.get('/change_log',(req,res) =>{
+    db.getChange('record_changelog')
+    .then(response =>{
+        res.status(200).json(response)
+    }).catch(err => {res.status(401).json(err)})
+})
 router.get('/',(req,res) =>{
     db.getMany('latest_home_data')
     .then(response =>{

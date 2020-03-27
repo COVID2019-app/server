@@ -65,7 +65,8 @@ router.post('/', auth.restricted, (req, res) => {
 
 router.put('/update', (req,res) =>{
   const updates = req.body
-  db.updateAll(updates)
+  const country_id = req.body.country_id
+  db.updateAll(updates,country_id)
   .then(response =>{
     return res.status(200).json(response)
   })

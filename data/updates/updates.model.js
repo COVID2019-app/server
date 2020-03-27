@@ -3,9 +3,14 @@ const db = require('../db')
 module.exports ={
     postData,
     getData,
-    getMany
+    getMany,
+    getChange
 }
 
+function getChange(){
+    return db('record_changelog')
+    .orderBy('rec_ts','asc')
+}
 function postData(data){
     return db('latest_home_data')
     .insert(data,'id')

@@ -11,10 +11,12 @@ module.exports = {
 }
 
 
-function updateAll(updates){
+function updateAll(updates,country_id){
     return db('country_table')
+        .truncate()
+        .delete()
       .insert(updates)
-      .where('country_name','=',updates.country_name)
+      .where({ country_id })
 }
 
 function getData(category){
