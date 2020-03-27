@@ -6,17 +6,15 @@ module.exports = {
     updateData,
     deleteData,
     joinData,
-    joinCountryByDate,
-    getRegionData,
-    getRegionSum
+    joinCountryByDate
 }
 
 function getData(){
     return db('regions_table')
     .orderBy('regions_name')
 
-}
 
+<<<<<<< HEAD
 function getRegionData(id){
     return db('regions_table')
     .select('*') 
@@ -32,26 +30,38 @@ function getRegionSum(id) {
         .from('regions_table')
         .where('country_id', '=', id)
         .groupBy('regions_name')
+=======
+    
+   
+>>>>>>> 0a2f52dedc41bd57309f07890f2b27e8fb45df88
 }
 
-
 function joinData(id){
-    return db('regions_table')
-    .join('country_table','country_table.country_id','regions_table.country_id')
-    .where('regions_table.country_id','=',id)
-    .select("*")
+    return db("regions_table")
+     .where("regions_table.country_id", "=", id)
+      .select("*");
     
 }
 
 function joinCountryByDate(id,date){
     return db('regions_table')
-    .join('country_table','country_table.country_id','regions_table.country_id')
-     .where('regions_table.country_id','=',id)
-     .where('regions_table.date_of_case','=',date)
-    .select('*',"regions_table.confirmed_cases as daily_confirmed_cases",
-                "regions_table.deaths as daily_deaths",
-                "regions_table.recovered as daily_recovered"
-                )
+      .join(
+        'country_table',
+        'country_table.country_id',
+        'regions_table.country_id'
+      )
+      .where('regions_table.country_id', '=', id)
+      .where('regions_table.date_of_case', '=', date)
+      .select(
+        'regions_table.regions_id as regions_id',
+        'regions_table.confirmed_cases as daily_confirmed_cases',
+        'regions_table.deaths as daily_deaths',
+        'regions_table.recovered as daily_recovered',
+        'regions_table.country_id as country_id',
+        'regions_table.regions_name as regions_name',
+        'regions_table.date_of_case as date_of_case',
+        'country_table.country_name as country_name'
+      );
     
 }
 function postData(data){
@@ -71,4 +81,3 @@ function updateData(regions_id, updates) {
       .truncate()
       .delete()
   }
-

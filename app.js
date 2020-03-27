@@ -10,9 +10,7 @@ var usersRouter = require('./routes/users');
 const regionsRouter = require('./data/regions/regions.router')
 const usaRouter = require('./data/country/USA/usa.router')
 const authRouter = require('./routes/auth/auth.router')
-const stateRouter = require('./data/state/state.router')
-const graphqlHTTP = require('express-graphql')
-
+const updatesRouter = require('./data/updates/updates.router')
 var app = express();
 var cors = require("cors");
 
@@ -28,16 +26,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/auth',authRouter)
-app.use('/state',stateRouter)
 app.use('/country', countryRouter);
+app.use('updates',updatesRouter)
 app.use('/users', usersRouter);
 app.use('/regions',regionsRouter)
 app.use('/usa_regions',usaRouter)
-app.use('/graphql', graphqlHTTP({
-
-  graphiql: true
-}))
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
