@@ -30,9 +30,7 @@ router.post('/login', (req, res) => {
     const username = req.body.username
     const password = req.body.password
     console.log(username,password)
-  if(!password){
-    return res.status(401).json({message:"Check password"})
-  }
+ 
   db.getData(username)
     .first()
     .then(user => {
