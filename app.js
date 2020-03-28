@@ -11,6 +11,7 @@ const regionsRouter = require('./data/regions/regions.router')
 const usaRouter = require('./data/country/USA/usa.router')
 const authRouter = require('./routes/auth/auth.router')
 const updatesRouter = require('./data/updates/updates.router')
+
 var app = express();
 var cors = require("cors");
 
