@@ -25,22 +25,17 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
+  let { username, password } = req.body;
 
-  
-    const username = req.body.username
-    const password = req.body.password
-    console.log(username,password)
- 
-  db.getData(username)
-    
+  db.findBy({ username })
+    .first()
     .then(user => {
-      console.log(user)
-      if (user.password === password) {
+      if (user.username === username && user.password === password  ) {
         // produce token
         const token = generateToken(user);
 
         // add token to response
-       return  res.status(200).json({
+        res.status(200).json({
           message: `Welcome ${user.username}!`,
           token,
         });

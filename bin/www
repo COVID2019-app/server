@@ -97,7 +97,7 @@ function onListening() {
 // Start Cron
 
 
-cron.schedule('* 01,07,13,20,22  * * *',async () => {
+cron.schedule('5 1 * * *',async () => {
   await  fetch('https://cvid.herokuapp.com/updates')
         .then(res => console.log("UPDATE ENDPONT",res.text))
         
