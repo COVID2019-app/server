@@ -15,6 +15,15 @@ router.get("/",(req,res) =>{
     })
     .catch(error =>{res.status(401).json({message:error.message})})
 })
+router.get("/sum/:id", (req, res) => {
+    const id = req.params.id
+
+    db.getRegionSum(id)
+        .then(data => {
+            res.status(200).json(data)
+        })
+        .catch(error => { res.status(401).json({ message: error.message }) })
+})
 router.get('/:id',(req,res) =>{
     const id = req.params.id
     console.log("ID",id)

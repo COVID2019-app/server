@@ -6,22 +6,31 @@ module.exports = {
     updateData,
     deleteData,
     joinData,
-    joinCountryByDate
+    joinCountryByDate,
+    getRegionSum,
 }
 
 function getData(){
     return db('regions_table')
     .orderBy('regions_name')
-
-
-    
-   
+}
+function getRegionSum(id) {
+    return db('regions_table')
+        .select('regions_name')
+        .sum('confirmed_cases as confirmed_cases')
+        .sum('deaths as deaths')
+        .sum('recovered as recovered')
+        .from('regions_table')
+        .where('country_id', '=', id)
+        .groupBy('regions_name')
+        .orderBy('confirmed_cases', 'desc');
 }
 
 function joinData(id){
     return db("regions_table")
      .where("regions_table.country_id", "=", id)
-      .select("*");
+      .select("*")
+      .orderBy('date_of_case', 'asc');
     
 }
 

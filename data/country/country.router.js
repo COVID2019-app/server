@@ -63,6 +63,15 @@ router.post('/', auth.restricted, (req, res) => {
     });
 });
 
+router.put('/update', (req,res) =>{
+  const updates = req.body
+  const country_id = req.body.country_id
+  db.updateAll(updates,country_id)
+  .then(response =>{
+    return res.status(200).json(response)
+  })
+  .catch(err =>{console.log(err)})
+})
 router.put('/:id', auth.restricted, (req, res) => {
   const id = req.params.id;
   const updates = req.body;
