@@ -6,7 +6,8 @@ module.exports = {
     updateData,
     deleteData,
     getDataId,
-    updateAll
+    updateAll,
+    
 
 }
 
