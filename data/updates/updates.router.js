@@ -25,7 +25,7 @@ router.get('/',(req,res) =>{
       
      fs.writeFile('data.json',JSON.stringify(response),function (err){
          if (err) throw err;
-         console.log("Complete")
+         console.log("Complete DATA>JSON")
      })
      res.status(200).json(response)
     })

@@ -8,8 +8,10 @@ module.exports = {
 }
 
 function getData(){
-    return db('daily_confirmed')
-    .orderBy('country_name')
+    return db('daily')
+    .innerJoin('regions_iso','daily.country',"regions_iso.iso_code")
+    .select('daily.*','regions_iso.country_name')
+    .orderBy('country')
 }
 
 function postData(data){

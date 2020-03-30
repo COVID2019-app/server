@@ -7,21 +7,26 @@ module.exports = {
     deleteData,
     getDataId,
     updateAll,
+    getIso
     
 
 }
 
-
-function updateAll(updates,country_id){
-    return db('country_table')
-        .truncate()
-        .delete()
-      .insert(updates)
-      .where({ country_id })
+function getIso(){
+    return db('regions_iso')
+            .orderBy('country_name',"asc")
+}
+async function  updateAll(updates){
+     return  db('country_table')
+            .where('country_id','=',updates.country_id)
+            .update({ updates  })
+     
 }
 
 function getData(category){
     return db('country_table')
+        .join('regions_iso','country_table.country_name','regions_iso.country_name')
+        .select('country_table.*','regions_iso.iso_code')
         .orderBy(category,'desc')
 }
 function getDataId(id){

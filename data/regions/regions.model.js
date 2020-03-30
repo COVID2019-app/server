@@ -41,8 +41,10 @@ function joinCountryByDate(id,date){
         'country_table.country_id',
         'regions_table.country_id'
       )
+      
       .where('regions_table.country_id', '=', id)
       .where('regions_table.date_of_case', '=', date)
+   
       .select(
         'regions_table.regions_id as regions_id',
         'regions_table.confirmed_cases as daily_confirmed_cases',
@@ -51,8 +53,11 @@ function joinCountryByDate(id,date){
         'regions_table.country_id as country_id',
         'regions_table.regions_name as regions_name',
         'regions_table.date_of_case as date_of_case',
-        'country_table.country_name as country_name'
-      );
+        'country_table.country_name as country_name',
+         
+      )
+      .innerJoin('regions_iso','country_table.country_name','regions_iso.country_name')
+      .select("regions_table.*",'regions_iso.iso_code')
     
 }
 function postData(data){
