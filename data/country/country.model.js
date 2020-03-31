@@ -14,7 +14,7 @@ module.exports = {
 
 function getIso(){
     return db('regions_iso')
-            .orderBy('country_name',"asc")
+            .orderBy('country',"asc")
 }
 async function  updateAll(updates){
      return  db('country_table')
@@ -25,7 +25,7 @@ async function  updateAll(updates){
 
 function getData(category){
     return db('country_table')
-        .join('regions_iso','country_table.country_name','regions_iso.country_name')
+        .join('regions_iso','country_table.country','regions_iso.country')
         .select('country_table.*','regions_iso.iso_code')
         .orderBy(category,'desc')
 }

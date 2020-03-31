@@ -16,7 +16,7 @@ router.get('/regions_iso',(req,res) =>{
 router.get("/sort",(req,res) =>{
 
     if (!req.body.category) {
-        db.getData("confirmed_cases")
+        db.getData("cases")
           .then(data => {
             res.status(200).json(data);
           })
