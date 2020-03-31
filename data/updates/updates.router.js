@@ -19,20 +19,21 @@ router.get('/change_log',(req,res) =>{
         res.status(200).json(response)
     }).catch(err => {res.status(401).json(err)})
 })
-router.get('/',(req,res) =>{
+router.get('/old',(req,res) =>{
     db.getMany('latest_home_data')
     .then(response =>{
       
      fs.writeFile('data.json',JSON.stringify(response),function (err){
          if (err) throw err;
-         console.log("Complete")
+         console.log("Complete DATA>JSON")
      })
      res.status(200).json(response)
     })
     .catch(error => {console.log(error)})
 })
 router.get('/', (req,res) =>{
-    db.getData('latest_home_data')
+    regions_iso = req.body
+    db.getAll(regions_iso)
 
     .then(response =>{
         console.log(response)

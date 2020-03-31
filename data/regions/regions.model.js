@@ -17,13 +17,13 @@ function getData(){
 function getRegionSum(id) {
     return db('regions_table')
         .select('regions_name')
-        .sum('confirmed_cases as confirmed_cases')
+        .sum('cases as cases')
         .sum('deaths as deaths')
         .sum('recovered as recovered')
         .from('regions_table')
         .where('country_id', '=', id)
         .groupBy('regions_name')
-        .orderBy('confirmed_cases', 'desc');
+        .orderBy('cases', 'desc');
 }
 
 function joinData(id){
@@ -41,18 +41,23 @@ function joinCountryByDate(id,date){
         'country_table.country_id',
         'regions_table.country_id'
       )
+      
       .where('regions_table.country_id', '=', id)
       .where('regions_table.date_of_case', '=', date)
+   
       .select(
         'regions_table.regions_id as regions_id',
-        'regions_table.confirmed_cases as daily_confirmed_cases',
+        'regions_table.cases as daily_cases',
         'regions_table.deaths as daily_deaths',
         'regions_table.recovered as daily_recovered',
         'regions_table.country_id as country_id',
         'regions_table.regions_name as regions_name',
         'regions_table.date_of_case as date_of_case',
-        'country_table.country_name as country_name'
-      );
+        'country_table.country as country',
+         
+      )
+      .innerJoin('regions_iso','country_table.country','regions_iso.country')
+      .select("regions_table.*",'regions_iso.iso_code')
     
 }
 function postData(data){
@@ -72,3 +77,5 @@ function updateData(regions_id, updates) {
       .truncate()
       .delete()
   }
+
+

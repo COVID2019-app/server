@@ -19,8 +19,6 @@ router.get('/',(req,res) =>{
     .catch(err => {res.status(401).json(err.message)})
 })
 
-<<<<<<< HEAD
-=======
 router.put('/:id', auth.restricted, (req, res) => {
   const id = req.params.id;
   const updates = req.body;
@@ -32,5 +30,5 @@ router.put('/:id', auth.restricted, (req, res) => {
       res.status(401).json(error.message);
     });
 });
->>>>>>> 8cbfc9f11eeab84f9b7ab1c829a8ef39f766d390
+
 module.exports = router

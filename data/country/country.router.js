@@ -7,10 +7,16 @@ const auth = require("../../routes/auth/auth.middleware")
  * @code 200
  * @returns {Object}
  */
+
+router.get('/regions_iso',(req,res) =>{
+  db.getIso()
+  .then(response =>{res.status(200).json(response)})
+  .catch(err => {res.status(401).json(err)})
+})
 router.get("/sort",(req,res) =>{
 
     if (!req.body.category) {
-        db.getData("confirmed_cases")
+        db.getData("cases")
           .then(data => {
             res.status(200).json(data);
           })
@@ -52,7 +58,7 @@ router.get("/sort",(req,res) =>{
  * @returns {String} ID
  */
 router.post('/', auth.restricted, (req, res) => {
-  console.log(req);
+  
   const data = req.body;
   db.postData(data)
     .then(Obj => {
@@ -63,15 +69,7 @@ router.post('/', auth.restricted, (req, res) => {
     });
 });
 
-router.put('/update', (req,res) =>{
-  const updates = req.body
-  const country_id = req.body.country_id
-  db.updateAll(updates,country_id)
-  .then(response =>{
-    return res.status(200).json(response)
-  })
-  .catch(err =>{console.log(err)})
-})
+
 router.put('/:id', auth.restricted, (req, res) => {
   const id = req.params.id;
   const updates = req.body;

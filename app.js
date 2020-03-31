@@ -11,7 +11,7 @@ const regionsRouter = require('./data/regions/regions.router')
 const usaRouter = require('./data/country/USA/usa.router')
 const authRouter = require('./routes/auth/auth.router')
 const updatesRouter = require('./data/updates/updates.router')
-
+const dailyRouter = require('./data/daily/daily.router')
 var app = express();
 var cors = require("cors");
 
@@ -32,6 +32,7 @@ app.use('/updates',updatesRouter)
 app.use('/users', usersRouter);
 app.use('/regions',regionsRouter)
 app.use('/usa_regions',usaRouter)
+app.use('/daily',dailyRouter)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

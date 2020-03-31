@@ -7,6 +7,8 @@ const auth = require("../../routes/auth/auth.middleware")
  * @code 200
  * @returns {Object}
  */
+
+
 router.get("/",(req,res) =>{
     
     db.getData()
