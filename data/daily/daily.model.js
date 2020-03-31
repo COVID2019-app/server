@@ -11,7 +11,7 @@ function getData(){
     return db('daily')
     .innerJoin('regions_iso','daily.country',"regions_iso.iso_code")
     .select('daily.*','regions_iso.country')
-    .orderBy('country')
+    .orderBy('daily.country')
 }
 
 function postData(data){
