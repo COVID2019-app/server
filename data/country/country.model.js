@@ -25,8 +25,8 @@ async function  updateAll(updates){
 
 function getData(category){
     return db('country_table')
-        .join('regions_iso','country_table.country','regions_iso.country')
-        .select('country_table.*','regions_iso.iso_code')
+        // .join('regions_iso','country_table.country','regions_iso.country')
+        // .select('country_table.*','regions_iso.iso_code')
         .orderBy(category,'desc')
 }
 function getDataId(id){
