@@ -1,15 +1,15 @@
 const router = require("express").Router();
 const db = require("./daily.model")
+const auth = require("../../routes/auth/auth.middleware")
 
-
-router.post('/',(req,res)=>{
-    const data = req.body
-    db.postData(data)
-    .then(response =>{
-        res.status(201).json(response)
+router.post('/', auth.restricted, (req, res) => {
+  const data = req.body;
+  db.postData(data)
+    .then(response => {
+      res.status(201).json(response);
     })
-    .catch(err =>res.status(401).json(err.message))
-})
+    .catch(err => res.status(401).json(err.message));
+});
 
 router.get('/',(req,res) =>{
     db.getData()
@@ -18,5 +18,24 @@ router.get('/',(req,res) =>{
     })
     .catch(err => {res.status(401).json(err.message)})
 })
+
+router.get('/_cron',(req,res) =>{
+   db.addDaily()
+   .then(response =>{
+     res.status(200).json(response)
+   })
+   .catch(err =>{res.status(401).json(err)})
+})
+router.put('/:id', auth.restricted, (req, res) => {
+  const id = req.params.id;
+  const updates = req.body;
+  db.updateData(id, updates)
+    .then(response => {
+      res.status(201).json(response);
+    })
+    .catch(error => {
+      res.status(401).json(error.message);
+    });
+});
 
 module.exports = router

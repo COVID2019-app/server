@@ -4,12 +4,22 @@ module.exports = {
     getData,
     postData,
     updateData,
-    deleteData
+    deleteData,
+    findBy
 }
 
+
+function findBy(filter) {
+    return db('users').where(filter);
+  }
+  
 function getData(username){
     return db('users')
-            
+    .first(username)
+    
+    .where('users.username','=',username)
+ 
+  
            
         
 }

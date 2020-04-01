@@ -3,13 +3,17 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "cd bin && node www",
+    "dev": "cd coronadatascraper && npx rollup -c --watch",
+    "scrape": "cd coronadatascraper && node ./src/shared/cli/index.js",
+    "timeseries": "cd coronadatascraper  && node ./src/shared/timeseries.js",
+    "start": "cd bin && node  www",
     "server": "node ./bin/www"
   },
   "engines": {
-    "node": "10.16.3"
+    "node": ">=10.16.3 <13.0.0"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
@@ -19,11 +23,16 @@
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.20.11",
+    "moment": "^2.24.0",
     "morgan": "~1.9.1",
+    "mysql": "^2.18.1",
+    "node-cmd": "^3.0.0",
+    "node-cron": "^2.0.3",
+    "node-fetch": "^2.6.0",
     "pg": "^7.18.2",
     "pug": "^2.0.4"
   },
   "devDependencies": {
-    "nodeman": "^1.1.2"
+    "nodemon": "^1.1.2"
   }
 }

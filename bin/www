@@ -3,11 +3,16 @@
 /**
  * Module dependencies.
  */
-require('dotenv').config()
+var path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+
 var app = require('../app');
 var debug = require('debug')('server:server');
 var http = require('http');
+const cron = require('node-cron')
+const fetch = require('node-fetch')
 
+const addDaily = require('../config/default.js')
 /**
  * Get port from environment and store in Express.
  */
@@ -88,3 +93,36 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+
+// Start Cron
+
+
+cron.schedule( "* * * * * ", function(err) {
+  const shell = require('./child_helper');
+  const modify = [
+   
+ 
+      "node  ../coronadatascraper/src/shared/cli/index.js",
+    //  "node ../coronadatascraper/src/shared/timeseries.js",
+   
+    
+  ]
+ 
+  console.log("--------------------------START 1")
+    shell.series(modify, function(err){
+       console.log("DONE --DAILY")
+       console.log("DONE --TS")
+    })
+      
+})
+
+cron.schedule("6  * * * *",function(err){
+  const shell = require('./child_helper');
+  const daily = [
+    "node ./modify.js"
+  ]
+  shell.series(daily,function(err){
+    console.log("DONE MODIFY")
+  })
+})

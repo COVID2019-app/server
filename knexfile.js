@@ -1,12 +1,12 @@
 
-
-
+require('dotenv').config({path:__dirname+'/.env'})
+const DATABASE_URL = process.env.DATABASE_URL
   module.exports = {
     development: {
     client:'pg',
   
-      connection:process.env.DB_URL,
-      rejectUnauthorized:false
+      connection: DATABASE_URL
+    
       
 
  
@@ -23,7 +23,7 @@
       production: {
         client:'pg',
       
-          connection:process.env.DB_URL,
+          connection:process.env.DATABASE_URL,
           
     
      
