@@ -33,13 +33,6 @@ function joinData(id){
       .orderBy('date_of_case', 'asc');
     
 }
-<<<<<<< HEAD
-function joinData(country_id){
-    return db('regions_table')
-    .join('country_table','country_table.country_id','regions_table.country_id')
-    .where({country_id:country_id})
-    .select("*")
-=======
 
 function joinCountryByDate(id,date){
     return db('regions_table')
@@ -65,7 +58,6 @@ function joinCountryByDate(id,date){
       )
       .innerJoin('regions_iso','country_table.country','regions_iso.country')
       .select("regions_table.*",'regions_iso.iso_code')
->>>>>>> staging
     
 }
 function postData(data){
