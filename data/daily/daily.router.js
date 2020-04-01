@@ -19,6 +19,13 @@ router.get('/',(req,res) =>{
     .catch(err => {res.status(401).json(err.message)})
 })
 
+router.get('/_cron',(req,res) =>{
+   db.addDaily()
+   .then(response =>{
+     res.status(200).json(response)
+   })
+   .catch(err =>{res.status(401).json(err)})
+})
 router.put('/:id', auth.restricted, (req, res) => {
   const id = req.params.id;
   const updates = req.body;

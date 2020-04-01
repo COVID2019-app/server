@@ -1,33 +1,46 @@
-// const fs = require('fs')
-// const file = require('./data.json')
 
+const fs = require('fs')
 
-// let data = []
-// let arr = []
+const db = require('../data/db.js')
+const moment = require('moment')
+// const addDaily = require('../data/daily/daily.model.js')
+const file = require('./dist/data.json')
+let data = []
+let arr = []
 // let i = 2
-// function modify() {
-//  file.map(item =>{
-//   data = {
-//       country_id: i++,
-//       country_name:item.rec_territory,
-//       confirmed_cases:item.cases,
-//       deaths:item.deaths,
-//       recovered:item.recovered,
-//       severe_critical:item.severe,
-//       tested:item.tested,
-//       active_cases:item.active
-//   }
-// arr.push(JSON.stringify(data))
+async function modify(err,undefined,next) {
+  console.log("started Modify")
+await file.map(item =>{
+    
+  data = {
+      created_at:moment().calendar(),
+      active:item.active,
+      cases:item.cases,
+      deaths:item.deaths,
+      recovered:item.recovered,
+      population:item.population, 
+      coordinates:item.coordinates,
+      tested:item.tested,
+      country:item.country,
+      county:item.county,
+      aggregate:item.aggregate,
+      city:item.city,
+      featureId:item.featureId,
+  
+      state:item.state,
+      tz:item.tz,
+      url:item.url
+  }
+ arr.push(JSON.stringify(data))
 
-// })
-// fs.writeFile('country.json',arr,function (err) {
+})
+await fs.writeFile('daily.js',`module.exports = [${arr}]`,function (err) {
 
-//   if (err) throw err;
-//   console.log('Saved!');
-// });
+  if (err) throw err;
+  console.log('OK')
 
-// }
+});
+ console.log("FINISHED Modify")
+}
 
-
-
-// module.exports = modify
+module.exports = modify()
