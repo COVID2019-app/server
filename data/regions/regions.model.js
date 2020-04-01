@@ -5,13 +5,9 @@ module.exports = {
     postData,
     updateData,
     deleteData,
-<<<<<<< HEAD
-    joinData
-=======
     joinData,
     joinCountryByDate,
     getRegionSum,
->>>>>>> staging
 }
 
 function getData(){
