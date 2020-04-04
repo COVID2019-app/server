@@ -9,28 +9,33 @@ module.exports={
 
 function getAllData(){
     return db('time_series as t')
-    .join('regions_iso as r','t.country','r.iso_code')
+    .join('regions_iso','t.country','regions_iso.iso_code')
     .select(
         't.*',
-        'r.iso_code',
-        'r.country')
-    .orderBy('t.country','asc')
+        'regions_iso.iso_code',
+        'regions_iso.country as name')
+    .orderBy('t.date','asc')
 }
 
-function getByCountry(country){
-    return db('time_series as t')
-    .join('regions_iso as r','t.country','r.iso_code')
+async function getByCountry(name){
+    console.log(name)
+     db('time_series as t')
+        .select(
+            't.country',
+         't.cases',
+         't.active',
+          )
+        .where('t.country','=',name)
+ 
+    }
 
-    .select('t.*','r.country','r.iso_code')
-    .where('r.iso_code','=',country)
 
-    .orderBy('date','asc')
-}
-function getByDate(dates){
+function getByDate(date){
     
     return db('time_series')
-         .where('date','=',dates)
-
+    .select('date','cases','recovered','deaths','country')
+    .where({ date })
+    .orderBy('date','asc')
  
   
 }
