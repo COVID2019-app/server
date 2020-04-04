@@ -1,6 +1,6 @@
 
 const fs = require('fs')
-const file1 = require('./timeseries.json')
+const file1 = require('./data1.json')
 
 // const db = require('../data/db.js')
 const moment = require('moment')
@@ -22,22 +22,22 @@ async function modify(err,undefined,next) {
   data = {
         // id:i++,
       //  created_at:'',
-      ID:item.ID,
+      // ID:item.ID,
       active:item.active,
       cases:item.cases,
       deaths:item.deaths,
       recovered:item.recovered,
-       population:item.population, 
-      coordinates:item.coordinates,
+      //  population:item.population, 
+      // coordinates:item.coordinates,
       tested:item.tested,
       country:item.country,
        county:item.county,
-       aggregate:item.aggregate,
-       city:item.city,
-       featureId:item.featureId,
+      //  aggregate:item.aggregate,
+      //  city:item.city,
+      //  featureId:item.featureId,
        date:item.date,
        state:item.state,
-       tz:item.tz,
+      //  tz:item.tz,
        growthFactor:item.growthFactor,
 
       url:item.url
@@ -47,7 +47,7 @@ async function modify(err,undefined,next) {
   arr.push(JSON.stringify(data))
 
  }))
- await fs.writeFile('table3.json',`module.exports = [${arr}]`,function (err) {
+ await fs.writeFile('data4.js',`module.exports = [${arr}]`,function (err) {
 
    if (err) throw err;
    console.log('OK')

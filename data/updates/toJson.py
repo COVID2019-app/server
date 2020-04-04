@@ -2,12 +2,12 @@ import csv , json
 pathToCsv = 'data.csv'
 pathToJson = 'data.json'
 
-data = {}
+data = []
 with open(pathToCsv) as csvFile:
     csvReader = csv.DictReader(csvFile)
-    for rows in csvReader:
-        id = rows['id']
-        data[id] = rows
+    for csvRow in csvReader:
+        data.append(csvRow)
+     
         
         
 with open(pathToJson,'w') as jsonFile:

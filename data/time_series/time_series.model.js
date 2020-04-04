@@ -34,3 +34,7 @@ function getByDate(dates){
  
   
 }
+function addData(data){
+    return db('time_series')
+        .insert(data)
+}

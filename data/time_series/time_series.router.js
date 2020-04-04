@@ -37,4 +37,11 @@ router.get('/byDate/:date',(req,res) =>{
         res.status(401).json(error.message)
     })
 })
+
+router.post('/add',(req,res) =>{
+    const data = req.body
+    db.addData(data)
+    .then(resp =>{res.status(200).json(resp)})
+    .catch(error =>{res.status(401).json(error.message)})
+})
 module.exports = router
