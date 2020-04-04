@@ -17,15 +17,17 @@ function getAllData(){
     .orderBy('t.date','asc')
 }
 
-async function getByCountry(name){
-    console.log(name)
+function getByCountry(iso){
+    console.log(iso)
      db('time_series as t')
+     .join('regions_iso','t.country','regions_iso.iso_code')
         .select(
-            't.country',
-         't.cases',
-         't.active',
+            't.*',
+            'regions_iso.country as name',
+            'regions_iso.iso_code'
           )
-        .where('t.country','=',name)
+        .where('regions_iso.iso_code','=',iso)
+        .orderBy('t.date','asc')
  
     }
 

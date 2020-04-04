@@ -1,12 +1,26 @@
 const router = require('express').Router();
 const db = require('./time_series.model')
 const fs = require('fs')
-
+const cache = require('../../cache/time-series.cache')
 
 router.get('/',(req,res) =>{
     db.getAllData()
     .then(response =>{
-        res.status(200).json(response)
+   response.map(item =>{
+    const items =
+    {
+ active:item.active,
+ cases:item.cases,
+ deaths:item.deaths,
+ recovered:item.recovered,
+ tested:item.tested,
+ country:item.country,
+ date:item.date}
+ cache.set(items.date,response.date)
+     })
+     
+
+     res.status(200).json(response)
     })
     .catch(error =>{
         res.status(401).json(error.message)
@@ -15,10 +29,15 @@ router.get('/',(req,res) =>{
 
 
 router.get('/byCountry/:iso',  (req,res) =>{
-    const bill = req.params.iso.toUpperCase();
-     db.getByCountry(bill)
-        .then(response =>{
-    res.status(200).json(response.name)
+     const iso = req.params.iso
+    const getCode = cache.get(iso)
+    if (getCode){
+        res.status(200).json('response')
+    }
+     db.getByCountry(iso)
+    .then(date =>{
+    res.status(200).json(date.name)
+    cache.set(date,date)
     })
     .catch(error =>{
         res.status(401).json(error)
