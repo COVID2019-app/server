@@ -7,11 +7,15 @@ module.exports = {
     deleteData,
     getDataId,
     updateAll,
-    getIso
+    getIso,
+    getLocations
     
 
 }
-
+function getLocations(){
+    return db('locations')
+            .orderBy('id',"asc")
+}
 function getIso(){
     return db('regions_iso')
             .orderBy('country',"asc")
@@ -25,9 +29,9 @@ async function  updateAll(updates){
 
 function getData(category){
     return db('country_table')
-        // .join('regions_iso','country_table.country','regions_iso.country')
-        // .select('country_table.*','regions_iso.iso_code')
-        .orderBy(category,'desc')
+         .join('regions_iso','country_table.country','regions_iso.country')
+         .select('country_table.*','regions_iso.*')
+        // .orderBy(category,'desc')
 }
 function getDataId(id){
     return db('country_table')
