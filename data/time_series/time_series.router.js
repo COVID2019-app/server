@@ -4,69 +4,56 @@ const fs = require('fs')
 const cache = require('../../cache/time-series.cache')
 
 router.get('/',(req,res) =>{
-    db.getAllData()
-    .then(response =>{
-   response.map(item =>{
-    const items =
-    {
- active:item.active,
- cases:item.cases,
- deaths:item.deaths,
- recovered:item.recovered,
- tested:item.tested,
- country:item.country,
- date:item.date}
- cache.set(items.date,response.date)
-     })
-     
-
-     res.status(200).json(response)
-    })
+  
+     db.getAllData()
+     .then(resp => {
+    res.status(200).send(resp)
+    cache.set('time_series',resp) 
+       })
     .catch(error =>{
-        res.status(401).json(error.message)
+        throw error
     })
 })
 
 
-router.get('/byCountry/:iso',  (req,res) =>{
-     const iso = req.params.iso
-    const getCode = cache.get(iso)
-    if (getCode){
-        res.status(200).json('response')
-    }
-     db.getByCountry(iso)
-    .then(date =>{
-    res.status(200).json(date.name)
-    cache.set(date,date)
+
+router.get('/byCountry/:iso',  async (req,res) =>{
+     const iso = req.params.iso.toUpperCase()
+    
+   await  db.getByCountry(iso)
+     .then(resp =>{
+        cache.set('byCountry',resp)
+     res.status(200).json(resp)
+  
     })
     .catch(error =>{
         res.status(401).json(error)
     })
 })
-router.get('/byDate/:day',(req,res) =>{
-    let dates = []
-    let data =[]
-    const day = JSON.stringify(req.params.date)
-    console.log(day)
-    db.getByDate(day)
-    .then(re =>{
-        dates.push(JSON.stringify(re))
-        // re.map(r =>{
+// router.get('/byDate/:day',(req,res) =>{
+//     let dates = []
+//     let data =[]
+//     const day = JSON.stringify(req.params.date)
+//     console.log(day)
+//     db.getByDate(day)
+//     .then(re =>{
+//         dates.push(JSON.stringify(re))
+//         // re.map(r =>{
            
-        // data = {date:r.date,cases:r.cases,recovered:r.recovered,deaths:r.deaths,country:r.country,tested:r.tested,growthFactor:r.growthFactor}
-        // })
+//         // data = {date:r.date,cases:r.cases,recovered:r.recovered,deaths:r.deaths,country:r.country,tested:r.tested,growthFactor:r.growthFactor}
+//         // })
        
    
-         res.status(200).json(dates)
+//          res.status(200).json(dates)
  
         
      
         
-    })
-    .catch(err =>{
-        res.status(401).json(err.message)
-    })
-})
+//     })
+//     .catch(err =>{
+//         res.status(401).json(err.message)
+//     })
+// })
 
 router.post('/add',(req,res) =>{
     const data = req.body

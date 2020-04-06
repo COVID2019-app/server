@@ -1,13 +1,13 @@
 
 const fs = require('fs')
-const file1 = require('./data1.json')
+const file1 = require('../timeseries6.json')
 
 // const db = require('../data/db.js')
-const moment = require('moment')
-const addDaily = require('../data/daily/daily.model.js')
+// const moment = require('moment')
+// const addDaily = require('../data/daily/daily.model.js')
 // const file1 = require('table.json')
 
-// JSON.stringify(file2);
+JSON.stringify(file1);
 // JSON.stringify(file3)
 const files =Object.values(file1)
 let data = []
@@ -38,16 +38,16 @@ async function modify(err,undefined,next) {
        date:item.date,
        state:item.state,
       //  tz:item.tz,
-       growthFactor:item.growthFactor,
+      //  growthFactor:item.growthFactor,
 
-      url:item.url
+      // url:item.url
      
   }
    
   arr.push(JSON.stringify(data))
 
  }))
- await fs.writeFile('data4.js',`module.exports = [${arr}]`,function (err) {
+ await fs.writeFile('data.js',`module.exports = [${arr}]`,function (err) {
 
    if (err) throw err;
    console.log('OK')

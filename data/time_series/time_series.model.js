@@ -8,26 +8,25 @@ module.exports={
 }
 
 function getAllData(){
-    return db('time_series as t')
-    .join('regions_iso','t.country','regions_iso.iso_code')
-    .select(
-        't.*',
-        'regions_iso.iso_code',
-        'regions_iso.country as name')
-    .orderBy('t.date','asc')
+    return db('time_series')
+   
+    .orderBy('country','asc')
 }
 
+
+
 function getByCountry(iso){
-    console.log(iso)
-     db('time_series as t')
-     .join('regions_iso','t.country','regions_iso.iso_code')
-        .select(
-            't.*',
-            'regions_iso.country as name',
-            'regions_iso.iso_code'
+   
+  return db('time_series')
+  .join('countryInfo','time_series.country','countryInfo.country')
+  .select(
+          'time_series.country',
+          'time_series.province',
+           'time_series.timeline',
+          'countryInfo.iso3'
           )
-        .where('regions_iso.iso_code','=',iso)
-        .orderBy('t.date','asc')
+   .where('countryInfo.iso3','=',iso)
+    
  
     }
 

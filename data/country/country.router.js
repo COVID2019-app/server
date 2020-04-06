@@ -8,11 +8,7 @@ const auth = require("../../routes/auth/auth.middleware")
  * @returns {Object}
  */
 
-router.get('/locations',(req,res) =>{
-  db.getLocations()
-  .then(response =>{res.status(200).json(response)})
-  .catch(error =>{res.status(401).json(error.message)})
-})
+
 router.get('/regions_iso',(req,res) =>{
   db.getIso()
   .then(response =>{res.status(200).json(response)})
@@ -21,7 +17,7 @@ router.get('/regions_iso',(req,res) =>{
 router.get("/sort",(req,res) =>{
 
     if (!req.body.category) {
-        db.getData("country")
+        db.getData("country_table.cases")
           .then(data => {
             res.status(200).json(data);
           })

@@ -1,4 +1,0 @@
-[submodule "coronadatascraper"]
-	path = coronadatascraper
-	url = https://github.com/lazd/coronadatascraper.git
-	branch = master

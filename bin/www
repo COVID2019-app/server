@@ -98,31 +98,30 @@ function onListening() {
 // Start Cron
 
 
-// cron.schedule( "* * * * * ", function(err) {
-//   const shell = require('./child_helper');
-//   const modify = [
-   
+//  cron.schedule( "* * * * * ", function(err) {
+//    const shell = require('./child_helper');
+//    const modify = [
  
-//       "node  ../coronadatascraper/src/shared/cli/index.js",
-//     //  "node ../coronadatascraper/src/shared/timeseries.js",
-   
-    
-//   ]
- 
-//   console.log("--------------------------START 1")
-//     shell.series(modify, function(err){
-//        console.log("DONE --DAILY")
-//        console.log("DONE --TS")
-//     })
-      
-// })
 
-// cron.schedule("6  * * * *",function(err){
-//   const shell = require('./child_helper');
-//   const daily = [
-//     "node ./modify.js"
-//   ]
-//   shell.series(daily,function(err){
-//     console.log("DONE MODIFY")
-//   })
-// })
+//        "node  ../coronadatascraper/src/shared/cli/index.js",
+//      //  "node ../coronadatascraper/src/shared/timeseries.js",
+ 
+  
+//    ]
+
+//    console.log("--------------------------START 1")
+//      shell.series(modify, function(err){
+//         console.log("DONE --DAILY")
+//         console.log("DONE --TS")
+//      })
+   
+//  })
+//  cron.schedule("* * * * *",function(err){
+//    const shell = require('./child_helper');
+//    const daily = [
+//      "node ./modify.js"
+//    ]
+//    shell.series(daily,function(err){
+//      console.log("DONE MODIFY")
+//    })
+//  })

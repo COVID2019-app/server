@@ -8,14 +8,11 @@ module.exports = {
     getDataId,
     updateAll,
     getIso,
-    getLocations
+   
     
 
 }
-function getLocations(){
-    return db('locations')
-            .orderBy('id',"asc")
-}
+
 function getIso(){
     return db('regions_iso')
             .orderBy('country',"asc")
@@ -29,9 +26,9 @@ async function  updateAll(updates){
 
 function getData(category){
     return db('country_table')
-         .join('regions_iso','country_table.country','regions_iso.country')
-         .select('country_table.*','regions_iso.*')
-        // .orderBy(category,'desc')
+         .join('countryInfo','country_table.country','countryInfo.country')
+         .select('country_table.*','countryInfo.*')
+         .orderBy(category,'desc')
 }
 function getDataId(id){
     return db('country_table')
