@@ -8,6 +8,7 @@ const auth = require("../../routes/auth/auth.middleware")
  * @returns {Object}
  */
 
+
 router.get('/regions_iso',(req,res) =>{
   db.getIso()
   .then(response =>{res.status(200).json(response)})
@@ -16,7 +17,7 @@ router.get('/regions_iso',(req,res) =>{
 router.get("/sort",(req,res) =>{
 
     if (!req.body.category) {
-        db.getData("cases")
+        db.getData("country_table.cases")
           .then(data => {
             res.status(200).json(data);
           })

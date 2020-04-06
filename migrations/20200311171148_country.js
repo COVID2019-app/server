@@ -64,7 +64,7 @@ exports.up = function(knex,Promise) {
 
 exports.down = function(knex,Promise) {
     return knex.schema
-    .dropTableIfExists('daily_confirmed')
+    // .dropTableIfExists('daily_confirmed')
     // .dropTableIfExists('state_table')
     // .dropTableIfExists('regions_table')
     // .dropTableIfExists('country_table')

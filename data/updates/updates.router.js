@@ -4,7 +4,7 @@ const fs = require('fs')
 router.post('/' , (req,res) =>{
     console.log(req)
     const data = req.body
- db.postData('latest_home_data',data)
+ db.postData('',data)
  .then(response =>{
   
      res.status(200).json(response)

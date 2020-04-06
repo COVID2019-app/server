@@ -7,7 +7,8 @@ module.exports = {
     deleteData,
     getDataId,
     updateAll,
-    getIso
+    getIso,
+   
     
 
 }
@@ -25,9 +26,9 @@ async function  updateAll(updates){
 
 function getData(category){
     return db('country_table')
-        // .join('regions_iso','country_table.country','regions_iso.country')
-        // .select('country_table.*','regions_iso.iso_code')
-        .orderBy(category,'desc')
+         .join('countryInfo','country_table.country','countryInfo.country')
+         .select('country_table.*','countryInfo.*')
+         .orderBy(category,'desc')
 }
 function getDataId(id){
     return db('country_table')

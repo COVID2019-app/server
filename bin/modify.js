@@ -1,33 +1,59 @@
-// const fs = require('fs')
-// const file = require('./data.json')
+
+const fs = require('fs')
+const file1 = require('../timeseries6.json')
+
+// const db = require('../data/db.js')
+// const moment = require('moment')
+// const addDaily = require('../data/daily/daily.model.js')
+// const file1 = require('table.json')
+
+JSON.stringify(file1);
+// JSON.stringify(file3)
+const files =Object.values(file1)
+let data = []
+let arr = []
+let i = 0
 
 
-// let data = []
-// let arr = []
-// let i = 2
-// function modify() {
-//  file.map(item =>{
-//   data = {
-//       country_id: i++,
-//       country_name:item.rec_territory,
-//       confirmed_cases:item.cases,
-//       deaths:item.deaths,
-//       recovered:item.recovered,
-//       severe_critical:item.severe,
-//       tested:item.tested,
-//       active_cases:item.active
-//   }
-// arr.push(JSON.stringify(data))
+async function modify(err,undefined,next) {
+  
+ await Object.values(files.map(item =>{
+ 
+  data = {
+        // id:i++,
+      //  created_at:'',
+      // ID:item.ID,
+      active:item.active,
+      cases:item.cases,
+      deaths:item.deaths,
+      recovered:item.recovered,
+      //  population:item.population, 
+      // coordinates:item.coordinates,
+      tested:item.tested,
+      country:item.country,
+       county:item.county,
+      //  aggregate:item.aggregate,
+      //  city:item.city,
+      //  featureId:item.featureId,
+       date:item.date,
+       state:item.state,
+      //  tz:item.tz,
+      //  growthFactor:item.growthFactor,
 
-// })
-// fs.writeFile('country.json',arr,function (err) {
+      // url:item.url
+     
+  }
+   
+  arr.push(JSON.stringify(data))
 
-//   if (err) throw err;
-//   console.log('Saved!');
-// });
+ }))
+ await fs.writeFile('data.js',`module.exports = [${arr}]`,function (err) {
 
-// }
+   if (err) throw err;
+   console.log('OK')
 
+ });
+  console.log("FINISHED Modify")
+}
 
-
-// module.exports = modify
+ module.exports = modify()
