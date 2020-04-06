@@ -1,15 +1,40 @@
 const router = require('express').Router();
 const db = require('./updates.model')
+const iso = require('../country/country.model')
 const fs = require('fs')
 router.post('/' , (req,res) =>{
-    console.log(req)
-    const data = req.body
- db.postData('',data)
- .then(response =>{
+    // console.log(req)
+    let i = 0
+    let id = []
+    let datas = []
+    const data = req.body.map(item =>{
+     let info = {country:item.country,
+                 cases:item.cases,
+                deaths:item.deaths,
+                recovered:item.recovered,
+                severe_critical:item.severe_critical,
+                tested:item.tested}
+       return id.push(info)
+    })
+     iso.getIso()  
+    .then(isoCode =>{
+    while ( i < isoCode.length){
+           console.log(isoCode.length)
+           if (isoCode[i].country.toUpperCase() === id[i].country.toUpperCase())
+              return isoCode[i].id , id[i].country
+                
+           
+              i ++;
+         }
+        return   console.log(isoCode)
+    })
+ 
+//  db.postData('',data)
+//  .then(response =>{
   
-     res.status(200).json(response)
- })
- .catch(error => res.status('401').send(`<h4>${error}</h4>`).json(error.message))
+//      res.status(200).json(response)
+//  })
+ .catch(error => res.status('401').json(error))
  
 
 })

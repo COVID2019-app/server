@@ -56,8 +56,9 @@ function joinCountryByDate(id,date){
         'country_table.country as country',
          
       )
-      .innerJoin('regions_iso','country_table.country','regions_iso.country')
-      .select("regions_table.*",'regions_iso.iso_code')
+      .innerJoin('countryInfo','country_table.country','countryInfo.country')
+      .select("regions_table.*",'countryInfo._id')
+      .where('country_table.country','=','regions_iso.country')
     
 }
 function postData(data){
