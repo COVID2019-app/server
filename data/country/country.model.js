@@ -14,8 +14,10 @@ module.exports = {
 }
 
 function getIso(){
-    return db('regions_iso')
-            .orderBy('country',"asc")
+    return db('regions_iso as r')
+            .join('countryInfo as c','r.iso_code','c.iso3')
+            .select('r.id','r.country','r.iso_code','c._id','c.lat','c.long')
+            .orderBy('r.id',"asc")
 }
 async function  updateAll(updates){
      return  db('country_table')
