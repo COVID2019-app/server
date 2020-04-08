@@ -1,5 +1,6 @@
 import csv , json
-pathToCsv = 'data.csv'
+
+pathToCsv = 'resu.csv'
 pathToJson = 'data.json'
 
 data = []

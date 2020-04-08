@@ -19,12 +19,17 @@ function getIso(){
             .select('r.id','r.country','r.iso_code','c._id','c.lat','c.long')
             .orderBy('r.id',"asc")
 }
-async function  updateAll(updates){
-     return  db('country_table')
-            .where('country_id','=',updates.country_id)
-            .update({ updates  })
-     
-}
+
+function  updateAll(updates){
+
+ return cdupdates.forEach(update =>{
+    
+   return db('country_table')
+        .select("*")
+        .where('country_table.country','=',update.country)
+        .orderBy('country_table.country','asc') 
+        .insert(update)
+    })}
 
 function getData(category){
     return db('country_table')

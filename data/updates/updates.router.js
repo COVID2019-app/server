@@ -6,27 +6,18 @@ router.post('/' , (req,res) =>{
     // console.log(req)
     let i = 0
     let id = []
-    let datas = []
-    const data = req.body.map(item =>{
-     let info = {country:item.country,
-                 cases:item.cases,
-                deaths:item.deaths,
-                recovered:item.recovered,
-                severe_critical:item.severe_critical,
-                tested:item.tested}
-       return id.push(info)
-    })
+    const data = req.body
      iso.getIso()  
     .then(isoCode =>{
     while ( i < isoCode.length){
-           console.log(isoCode.length)
-           if (isoCode[i].country.toUpperCase() === id[i].country.toUpperCase())
-              return isoCode[i].id , id[i].country
-                
-           
+       
+           if (isoCode[i].country.toUpperCase() === data.country.toUpperCase()){
+                id.push(isoCode[i])
+                console.log(id)
+           }
               i ++;
          }
-        return   console.log(isoCode)
+          return id
     })
  
 //  db.postData('',data)

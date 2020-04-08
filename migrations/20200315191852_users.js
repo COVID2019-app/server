@@ -1,9 +1,9 @@
 
 exports.up = function(knex) {
-   return  knex.schema.createTable('time_series',tbl => {
-    tbl.string('country',300)
-    tbl.json('timeline')
-    tbl.string('province',50)
+  //  return  knex.schema.createTable('time_series',tbl => {
+    // tbl.string('country',300)
+    // tbl.json('timeline')
+    // tbl.string('province',50)
     //  tbl.increments("id")
     //  tbl.string("city",200)
     //  tbl.string("county",200)
@@ -41,11 +41,11 @@ exports.up = function(knex) {
 //       tbl.integer('tested');
 //       tbl.integer('active_cases');
 
-   })
+  //  })
  }
 
  exports.down = function(knex) {
-  return knex.schema
-       .dropTableIfExists('time_series')
+  // return knex.schema
+  //      .dropTableIfExists('time_series')
      
 };
